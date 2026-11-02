@@ -86,10 +86,28 @@
     </div>
   </header>
 
-  <!-- ==================== 2. HERO SECTION BIRU ==================== -->
+  <!-- ==================== 2. HERO SECTION DENGAN FOTO LATAR MEMBAYANG ==================== -->
   <section id="heroSection" class="relative bg-gradient-to-r from-[#0b2853] via-[#164e9e] to-[#1e64d4] text-white py-10 md:py-14 px-4 overflow-hidden border-b-4 border-blue-900">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+    
+    <!-- 1. FOTO BACKGROUND DEGRADASI AWAN DARI KANAN KE KIRI -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <!-- Gambar Latar Belakang (Dinamis Diatur Admin) -->
+      <img 
+        id="viewHeroBgImg"
+        src="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80" 
+        alt="Latar Belakang Kie Raha" 
+        class="w-full h-full object-cover object-right opacity-30 filter blur-[0.5px] scale-105"
+      >
+      <!-- Gradasi Halus: Sisi kiri solid/gelap pekat (menjaga teks tetap tajam), sisi kanan transparan berawan -->
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0b2853] via-[#0b2853]/85 to-transparent"></div>
+      <!-- Gradasi Bawah ke Atas menyatu dengan pembatas section -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0b2853]/90 via-transparent to-black/20"></div>
+    </div>
 
+    <!-- Pola Grid Bintik Halus Bawaan -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none z-[1]"></div>
+
+    <!-- Konten Utama Hero Section -->
     <div class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
       
       <!-- Kolom Kiri: Teks Diperpanjang Jadi 1 Baris (lg:col-span-7) -->
@@ -104,25 +122,25 @@
           >
         </div>
 
-        <h1 class="text-3xl sm:text-4xl md:text-[42px] font-black tracking-tight leading-none mb-2 text-white font-display">
+        <h1 class="text-3xl sm:text-4xl md:text-[42px] font-black tracking-tight leading-none mb-2 text-white font-display drop-shadow-sm">
           DPD IPeKB
         </h1>
         
         <!-- Kepanjangan DPD IPeKB 1 Baris Penuh -->
-        <h2 class="text-sm sm:text-base font-semibold text-blue-100 mb-6 leading-relaxed whitespace-normal lg:whitespace-nowrap">
+        <h2 class="text-sm sm:text-base font-semibold text-blue-100 mb-6 leading-relaxed whitespace-normal lg:whitespace-nowrap drop-shadow">
           Dewan Pimpinan Daerah Ikatan Penyuluh Keluarga Berencana<br>
           <span class="text-amber-400 font-extrabold tracking-wide uppercase">Provinsi Maluku Utara</span>
         </h2>
 
         <!-- 3 Tombol Menu -->
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 w-full sm:w-auto">
-          <button onclick="switchPage('profil')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+          <button onclick="switchPage('profil')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm backdrop-blur-sm">
             Profil
           </button>
-          <button onclick="switchPage('visimisi')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+          <button onclick="switchPage('visimisi')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm backdrop-blur-sm">
             Visi Misi
           </button>
-          <button onclick="switchPage('layanan')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+          <button onclick="switchPage('layanan')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm backdrop-blur-sm">
             Layanan
           </button>
         </div>
@@ -511,7 +529,7 @@
           <i class="fa-solid fa-screwdriver-wrench text-lg"></i>
           <div>
             <h3 class="text-base font-bold leading-tight">Panel Administrasi & Pengelola Portal IPeKB</h3>
-            <p class="text-[11px] text-blue-200">Kelola artikel, halaman menu, banner hero, capaian program, ticker, dan pengurus</p>
+            <p class="text-[11px] text-blue-200">Kelola artikel, halaman menu, banner & latar hero, capaian program, ticker, dan pengurus</p>
           </div>
         </div>
         <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center text-sm transition">
@@ -541,7 +559,7 @@
         <!-- 2. Area Dashboard Admin -->
         <div id="adminDashboardArea" class="hidden space-y-6">
           
-          <!-- Baris Navigasi Tab Pengelola (Ditambahkan Tab Capaian Program) -->
+          <!-- Baris Navigasi Tab Pengelola -->
           <div class="flex flex-wrap items-center border-b border-slate-200 gap-2 sm:gap-4 text-xs font-bold pb-2">
             <button onclick="switchAdminTab('berita')" id="tabBtnBerita" class="pb-1 text-blue-600 border-b-2 border-blue-600 transition">
               <i class="fa-solid fa-newspaper mr-1"></i> Berita & Artikel
@@ -550,7 +568,7 @@
               <i class="fa-solid fa-file-lines mr-1"></i> Konten Menu Navigasi
             </button>
             <button onclick="switchAdminTab('banner')" id="tabBtnBanner" class="pb-1 text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition">
-              <i class="fa-solid fa-image mr-1"></i> Banner Kanan Atas
+              <i class="fa-solid fa-image mr-1"></i> Banner & Latar Hero
             </button>
             <button onclick="switchAdminTab('capaian')" id="tabBtnCapaian" class="pb-1 text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition">
               <i class="fa-solid fa-chart-pie mr-1"></i> Capaian Program
@@ -690,15 +708,38 @@
             </div>
           </div>
 
-          <!-- TAB 3: PENGATURAN BANNER KANAN ATAS HERO SECTION -->
+          <!-- TAB 3: PENGATURAN BANNER KANAN ATAS & BACKGROUND HERO -->
           <div id="adminTabBanner" class="hidden space-y-4">
+            
+            <!-- BAGIAN 1: PENGATURAN LATAR BELAKANG HERO (WATERMARK AWAN) -->
+            <div class="p-4 bg-blue-50/70 border border-blue-200 rounded-xl space-y-3">
+              <h5 class="text-xs font-bold text-blue-900 uppercase flex items-center">
+                <i class="fa-solid fa-panorama mr-1.5 text-blue-600"></i> Latar Belakang Hero (Watermark Awan Membayang)
+              </h5>
+              <p class="text-xs text-slate-500">Foto lanskap lebar dari ujung kanan sampai kiri di belakang teks yang berdegradasi halus ke warna biru.</p>
+
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-bold text-slate-600 uppercase">Pilih Foto Background Lebar</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-upload mr-1"></i>Unggah dari Komputer/HP:</label>
+                    <input type="file" id="inputFileHeroBgPhoto" accept="image/*" class="w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200">
+                  </div>
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-link mr-1"></i>Atau Tautan URL Online:</label>
+                    <input type="url" id="inputHeroBgUrl" placeholder="https://..." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BAGIAN 2: BANNER KOTAK KANAN ATAS -->
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
               <h5 class="text-xs font-bold text-blue-900 uppercase">Banner Lanskap Kanan Atas</h5>
-              <p class="text-xs text-slate-500">Perbarui gambar pemandangan serta kalimat slogan yang ada di dalam bingkai hero kanan atas.</p>
+              <p class="text-xs text-slate-500">Perbarui gambar di dalam kotak bingkai hero kanan atas beserta teks penjelasnya.</p>
 
-              <!-- Unggah Banner Hero -->
               <div class="space-y-1.5">
-                <label class="block text-[11px] font-bold text-slate-600 uppercase">Pilih Gambar Banner</label>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase">Pilih Gambar Kotak Banner</label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div>
                     <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-upload mr-1"></i>Unggah dari Komputer/HP:</label>
@@ -722,12 +763,12 @@
               </div>
 
               <button onclick="saveHeroBannerSetting()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow">
-                Perbarui Banner Kanan Atas
+                Perbarui Banner & Latar Hero
               </button>
             </div>
           </div>
 
-          <!-- TAB 4 (BARU): FORM KELOLA CAPAIAN PROGRAM -->
+          <!-- TAB 4: FORM KELOLA CAPAIAN PROGRAM -->
           <div id="adminTabCapaian" class="hidden space-y-4">
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
               <h5 class="text-xs font-bold text-blue-900 uppercase">Indikator Capaian Program Wilayah</h5>
