@@ -1,5 +1,4 @@
 // ==================== KONFIGURASI FIREBASE CLOUD ====================
-// Ganti nilai di bawah ini dengan konfigurasi dari Firebase Console Anda (Project SIDELILA atau Project Baru)
 const firebaseConfig = {
   apiKey: "AIzaSyB-d2nXMXrCltJtvUXVDWLtBAXiGhxYftA",
   authDomain: "portal-dpdipekb-malut.firebaseapp.com",
@@ -10,7 +9,7 @@ const firebaseConfig = {
   appId: "1:451928361261:web:59ad634e63e65da7172ba4"
 };
 
-// Inisialisasi Firebase aman (Mencegah inisialisasi ganda)
+// Inisialisasi Firebase aman
 let db = null;
 let storage = null;
 try {
@@ -145,12 +144,22 @@ let configData = {
   bendaharaPhoto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
 };
 
+// Data Capaian Program Global
+let capaianData = {
+  keluarga: "1.420",
+  kbAktif: "84,6%",
+  tribina: "328",
+  penyuluh: "215",
+  tahun: "Tahun 2026"
+};
+
 // ==================== INISIALISASI ====================
 window.addEventListener('DOMContentLoaded', () => {
   initStorage();
   listenFirebaseRealtime();
   renderPublicNews();
   renderConfigUI();
+  renderCapaianUI();
   const inputDate = document.getElementById('inputDate');
   if (inputDate) {
     inputDate.value = new Date().toISOString().split('T')[0];
@@ -176,22 +185,29 @@ function initStorage() {
   } else {
     pageContents = DEFAULT_PAGES;
   }
+
+  const storedCapaian = localStorage.getItem('ipekb_capaian');
+  if (storedCapaian) {
+    try { capaianData = Object.assign(capaianData, JSON.parse(storedCapaian)); } catch (e) {}
+  }
 }
 
 function saveStorage() {
   localStorage.setItem('ipekb_news_list', JSON.stringify(newsData));
   localStorage.setItem('ipekb_config', JSON.stringify(configData));
   localStorage.setItem('ipekb_pages', JSON.stringify(pageContents));
+  localStorage.setItem('ipekb_capaian', JSON.stringify(capaianData));
 
-  // Sinkronisasi otomatis ke Firebase jika aktif
+  // Sinkronisasi otomatis ke Firebase Realtime Database jika aktif
   if (db) {
     db.ref('portal_web/config').set(configData);
     db.ref('portal_web/news').set(newsData);
     db.ref('portal_web/pages').set(pageContents);
+    db.ref('portal_web/capaian').set(capaianData);
   }
 }
 
-// Mendengarkan data Realtime dari Firebase Cloud (Otomatis berubah di layar pengunjung)
+// Mendengarkan data Realtime dari Firebase Cloud
 function listenFirebaseRealtime() {
   if (!db) return;
 
@@ -218,24 +234,31 @@ function listenFirebaseRealtime() {
       localStorage.setItem('ipekb_pages', JSON.stringify(pageContents));
     }
   });
+
+  db.ref('portal_web/capaian').on('value', snapshot => {
+    if (snapshot.exists()) {
+      capaianData = snapshot.val();
+      localStorage.setItem('ipekb_capaian', JSON.stringify(capaianData));
+      renderCapaianUI();
+    }
+  });
 }
 
-// Helper: Membaca berkas gambar lokal dan mengonversinya menjadi URL data yang tersimpan di Realtime Database
+// Helper: Membaca berkas gambar lokal dan mengonversinya menjadi URL data base64
 function uploadImageToStorage(fileInput, fallbackUrl, folderName = "portal_assets") {
   return new Promise((resolve) => {
     if (fileInput && fileInput.files && fileInput.files[0]) {
       const file = fileInput.files[0];
       
-      // Batasi ukuran maksimal berkas ~2MB agar database tetap ringan dan cepat
+      // Batasi ukuran maksimal berkas ~2.5MB
       if (file.size > 2.5 * 1024 * 1024) {
-        showToast("Ukuran foto maksimal 2MB agar penyimpanan lancar!");
+        showToast("Ukuran foto maksimal 2.5MB agar penyimpanan lancar!");
         resolve(fallbackUrl);
         return;
       }
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        // Berhasil membaca gambar lokal langsung menjadi format data tersimpan
         resolve(e.target.result);
       };
       reader.onerror = function() {
@@ -248,6 +271,7 @@ function uploadImageToStorage(fileInput, fallbackUrl, folderName = "portal_asset
     }
   });
 }
+
 // ==================== FUNGSI UTAMA PERGANTIAN HALAMAN ====================
 function switchPage(pageKey) {
   const viewHome = document.getElementById('viewHomeArea');
@@ -470,7 +494,7 @@ function showDashboard() {
 }
 
 function switchAdminTab(tab) {
-  const tabs = ['berita', 'menu', 'banner', 'pengurus'];
+  const tabs = ['berita', 'menu', 'banner', 'capaian', 'pengurus'];
   tabs.forEach(t => {
     const el = document.getElementById('adminTab' + t.charAt(0).toUpperCase() + t.slice(1));
     const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -504,7 +528,7 @@ async function saveArticle(e) {
   const content = document.getElementById('inputContent').value.trim();
   const fileUrl = document.getElementById('inputFileUrl').value.trim();
 
-  // Proses upload berkas jika ada file lokal yang dipilih
+  // Proses upload berkas lokal
   const fileInput = document.getElementById('inputFileNewsPhoto');
   imageUrl = await uploadImageToStorage(fileInput, imageUrl, "berita_images");
 
@@ -647,6 +671,35 @@ async function saveHeroBannerSetting() {
   showToast('Banner kanan atas berhasil diperbarui!');
 }
 
+// ==================== PENGATURAN CAPAIAN PROGRAM (REAL-TIME CLOUD) ====================
+function saveCapaianSetting() {
+  const keluarga = document.getElementById('inputCapaianKeluarga').value.trim() || "1.420";
+  const kbAktif = document.getElementById('inputCapaianKbAktif').value.trim() || "84,6%";
+  const tribina = document.getElementById('inputCapaianTribina').value.trim() || "328";
+  const penyuluh = document.getElementById('inputCapaianPenyuluh').value.trim() || "215";
+  const tahun = document.getElementById('inputCapaianTahun').value.trim() || "Tahun 2026";
+
+  capaianData = { keluarga, kbAktif, tribina, penyuluh, tahun };
+
+  saveStorage();
+  renderCapaianUI();
+  showToast("Indikator Capaian Program berhasil diperbarui!");
+}
+
+function renderCapaianUI() {
+  const viewKeluarga = document.getElementById('viewCapaianKeluarga');
+  const viewKbAktif = document.getElementById('viewCapaianKbAktif');
+  const viewTribina = document.getElementById('viewCapaianTribina');
+  const viewPenyuluh = document.getElementById('viewCapaianPenyuluh');
+  const viewTahun = document.getElementById('viewCapaianTahun');
+
+  if (viewKeluarga) viewKeluarga.innerText = capaianData.keluarga;
+  if (viewKbAktif) viewKbAktif.innerText = capaianData.kbAktif;
+  if (viewTribina) viewTribina.innerText = capaianData.tribina;
+  if (viewPenyuluh) viewPenyuluh.innerText = capaianData.penyuluh;
+  if (viewTahun) viewTahun.innerText = capaianData.tahun;
+}
+
 // ==================== PENGATURAN TICKER & PENGURUS INTI ====================
 function populateSettingsForm() {
   if (document.getElementById('settingTickerInput')) {
@@ -664,6 +717,15 @@ function populateSettingsForm() {
     document.getElementById('settingSekretarisPhoto').value = configData.sekretarisPhoto;
     document.getElementById('settingBendaharaName').value = configData.bendaharaName;
     document.getElementById('settingBendaharaPhoto').value = configData.bendaharaPhoto;
+  }
+
+  // Isi formulir Capaian Program di panel admin
+  if (document.getElementById('inputCapaianKeluarga')) {
+    document.getElementById('inputCapaianKeluarga').value = capaianData.keluarga;
+    document.getElementById('inputCapaianKbAktif').value = capaianData.kbAktif;
+    document.getElementById('inputCapaianTribina').value = capaianData.tribina;
+    document.getElementById('inputCapaianPenyuluh').value = capaianData.penyuluh;
+    document.getElementById('inputCapaianTahun').value = capaianData.tahun;
   }
 }
 
