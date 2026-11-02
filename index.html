@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Resmi DPD IPeKB Provinsi Maluku Utara</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Animasi Putar Logo Horisontal Langsung -->
+  <style>
+    @keyframes spinHorizontal {
+      0% {
+        transform: perspective(600px) rotateY(0deg);
+      }
+      100% {
+        transform: perspective(600px) rotateY(360deg);
+      }
+    }
+    .logo-spin-slow {
+      display: inline-block;
+      animation: spinHorizontal 9s linear infinite;
+      will-change: transform;
+    }
+    .logo-spin-slow:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+  <!-- ==================== 1. TOP NAVBAR ==================== -->
+  <header class="bg-[#0b2853] border-b border-blue-900 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14">
+        
+        <!-- Menu Navigasi Utama -->
+        <nav class="hidden md:flex items-center space-x-6 text-[13px] font-bold text-slate-200">
+          <button onclick="switchPage('home')" id="nav-home" class="nav-item text-amber-400 py-1 transition">Home</button>
+          <button onclick="switchPage('profil')" id="nav-profil" class="nav-item hover:text-amber-400 py-1 transition">Profil</button>
+          <button onclick="switchPage('visimisi')" id="nav-visimisi" class="nav-item hover:text-amber-400 py-1 transition">Visi Misi</button>
+          <button onclick="switchPage('program')" id="nav-program" class="nav-item hover:text-amber-400 py-1 transition">Program Kerja</button>
+          <button onclick="switchPage('kegiatan')" id="nav-kegiatan" class="nav-item hover:text-amber-400 py-1 transition">Kegiatan</button>
+          <button onclick="switchPage('galeri')" id="nav-galeri" class="nav-item hover:text-amber-400 py-1 transition">Galeri</button>
+          <button onclick="switchPage('bantuan')" id="nav-bantuan" class="nav-item hover:text-amber-400 py-1 transition">Bantuan</button>
+        </nav>
+
+        <!-- Versi Mobile Header Label -->
+        <div class="md:hidden flex items-center space-x-2">
+          <span class="font-extrabold text-amber-400 text-sm tracking-wide">DPD IPeKB MALUT</span>
+        </div>
+
+        <!-- Sisi Kanan Navbar Bersih & Proporsional -->
+        <div class="flex items-center space-x-2">
+          <span class="hidden lg:inline-block text-[11px] font-semibold text-blue-200/80 bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/60">
+            <i class="fa-solid fa-shield-halved text-amber-400 mr-1.5"></i>Portal Resmi Kie Raha
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 2. HERO SECTION BIRU ==================== -->
+  <section id="heroSection" class="relative bg-gradient-to-r from-[#0b2853] via-[#164e9e] to-[#1e64d4] text-white py-10 md:py-14 px-4 overflow-hidden border-b-4 border-blue-900">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+
+    <div class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+      
+      <!-- Kolom Kiri: Teks Diperpanjang Jadi 1 Baris (lg:col-span-7) -->
+      <div class="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+        
+        <!-- Logo Resmi IPeKB -->
+        <div class="mb-3">
+          <img 
+            src="Logoipekb1.png" 
+            alt="Logo IPeKB Maluku Utara" 
+            class="logo-spin-slow w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-xl"
+          >
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-[42px] font-black tracking-tight leading-none mb-2 text-white font-display">
+          DPD IPeKB
+        </h1>
+        
+        <!-- Kepanjangan DPD IPeKB 1 Baris Penuh -->
+        <h2 class="text-sm sm:text-base font-semibold text-blue-100 mb-6 leading-relaxed whitespace-normal lg:whitespace-nowrap">
+          Dewan Pimpinan Daerah Ikatan Penyuluh Keluarga Berencana<br>
+          <span class="text-amber-400 font-extrabold tracking-wide uppercase">Provinsi Maluku Utara</span>
+        </h2>
+
+        <!-- 3 Tombol Menu -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 w-full sm:w-auto">
+          <button onclick="switchPage('profil')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+            Profil
+          </button>
+          <button onclick="switchPage('visimisi')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+            Visi Misi
+          </button>
+          <button onclick="switchPage('layanan')" class="px-7 py-1.5 border-2 border-white/80 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-md text-xs font-bold tracking-wide transition shadow-sm">
+            Layanan
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Kolom Kanan: Foto Penuh & Kotak Keterangan Ditaruh di Bawah Foto (lg:col-span-5) -->
+      <div class="lg:col-span-5 flex flex-col items-center lg:items-end w-full">
+        <div class="w-full max-w-md rounded-2xl overflow-hidden border-2 border-white/30 shadow-2xl bg-slate-900">
+          <!-- Foto Lanskap Terlihat Penuh Tanpa Terhalang -->
+          <img 
+            id="viewHeroBannerImg"
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" 
+            alt="Pemandangan Wilayah Maluku Utara" 
+            class="w-full h-52 sm:h-56 object-cover hover:scale-105 transition-transform duration-700 block"
+          >
+        </div>
+        
+        <!-- Kotak Keterangan Diturunkan di Bawah Bingkai Foto -->
+        <div class="w-full max-w-md mt-2.5 bg-white/95 backdrop-blur-md rounded-xl p-3 border border-white/40 shadow-lg text-slate-800 text-left">
+          <p id="viewHeroBannerTitle" class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-0.5">Semangat Berencana Di Bumi Kie Raha</p>
+          <p id="viewHeroBannerSubtitle" class="text-[11px] text-slate-600 line-clamp-2 font-medium">Dedikasi Penyuluh KB mewujudkan keluarga berkualitas & percepatan penurunan stunting.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 3. TICKER SEKILAS INFO (ROLLING TEKS BERJALAN) ==================== -->
+  <div class="bg-[#103b7b] text-white border-y border-blue-900 shadow-inner overflow-hidden">
+    <div class="max-w-[1240px] mx-auto flex items-center h-10 px-2 sm:px-4">
+      
+      <!-- Badge Kiri 'Sekilas Info' Tetap Diam -->
+      <div class="bg-white text-blue-950 font-black text-xs px-4 py-1.5 rounded-sm shadow-sm whitespace-nowrap shrink-0 border border-slate-200 z-10">
+        Sekilas Info
+      </div>
+
+      <!-- Area Teks Berjalan Menggunakan Tag Marquee Native -->
+      <div class="flex-1 ml-3 overflow-hidden flex items-center">
+        <marquee 
+          behavior="scroll" 
+          direction="left" 
+          scrollamount="7" 
+          onmouseover="this.stop();" 
+          onmouseout="this.start();" 
+          class="text-xs sm:text-sm font-medium tracking-wide text-white py-1 cursor-default"
+        >
+          <span id="tickerTextContainer">
+            Selamat Datang di Portal Website Resmi DPD IPeKB Provinsi Maluku Utara • Menjangkau Keluarga, Menata Masa Depan Sejahtera di Bumi Moloku Kie Raha.
+          </span>
+        </marquee>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 4. KONTEN UTAMA (LAYOUT 2 KOLOM) ==================== -->
+  <main id="mainContainer" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-6 w-full flex-1">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- SISI KIRI (SIDEBAR PENGURUS & SEKRETARIAT KOKOH) -->
+      <aside class="lg:col-span-4 space-y-5">
+
+        <!-- KOTAK 1: KETUA DPD -->
+        <div class="bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+          <div class="bg-gradient-to-r from-blue-600 to-blue-700 py-2 text-center text-white font-extrabold text-sm tracking-wide shadow-inner">
+            Pengurus Inti
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-44 h-56 sm:w-48 sm:h-60 rounded-lg overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-sm relative group">
+              <img 
+                id="viewPhotoKetua"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
+                alt="Ketua DPD IPeKB Malut" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              >
+            </div>
+            <div class="mt-3 w-full bg-blue-600 text-white text-center py-1.5 rounded font-extrabold text-xs shadow-sm uppercase tracking-wider" id="viewNameKetua">
+              Ketua DPD
+            </div>
+            <p class="text-[11px] text-slate-500 text-center mt-1.5 font-medium" id="viewSubKetua">Masa Bakti 2024 - 2028</p>
+          </div>
+        </div>
+
+        <!-- KOTAK 2: SEKRETARIS -->
+        <div class="bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-44 h-56 sm:w-48 sm:h-60 rounded-lg overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-sm relative group">
+              <img 
+                id="viewPhotoSekretaris"
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
+                alt="Sekretaris DPD IPeKB Malut" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              >
+            </div>
+            <div class="mt-3 w-full bg-blue-600 text-white text-center py-1.5 rounded font-extrabold text-xs shadow-sm uppercase tracking-wider" id="viewNameSekretaris">
+              Sekretaris
+            </div>
+            <p class="text-[11px] text-slate-500 text-center mt-1.5 font-medium" id="viewSubSekretaris">Bidang Administrasi & Keorganisasian</p>
+          </div>
+        </div>
+
+        <!-- KOTAK BENDAHARA -->
+        <div class="bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-44 h-56 sm:w-48 sm:h-60 rounded-lg overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-sm relative group">
+              <img 
+                id="viewPhotoBendahara"
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" 
+                alt="Bendahara DPD IPeKB Malut" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              >
+            </div>
+            <div class="mt-3 w-full bg-blue-600 text-white text-center py-1.5 rounded font-extrabold text-xs shadow-sm uppercase tracking-wider" id="viewNameBendahara">
+              Bendahara
+            </div>
+            <p class="text-[11px] text-slate-500 text-center mt-1.5 font-medium" id="viewSubBendahara">Bidang Keuangan & Perbendaharaan</p>
+          </div>
+        </div>
+
+        <!-- KOTAK 3: SEKRETARIAT KANTOR -->
+        <div class="bg-white rounded-xl border-2 border-blue-600 p-4 shadow-md text-slate-700">
+          <div class="flex items-center space-x-2 text-blue-700 font-extrabold text-xs uppercase tracking-wider border-b pb-2 mb-2">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Sekretariat Wilayah</span>
+          </div>
+          <p class="text-xs font-semibold text-slate-800">DPD IPeKB Provinsi Maluku Utara</p>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+            Jalan Marikrubu, Kecamatan Ternate Tengah<br>
+            Kota Ternate, Provinsi Maluku Utara
+          </p>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-blue-600 font-medium flex items-center space-x-1">
+            <i class="fa-solid fa-clock text-[10px]"></i>
+            <span>Senin - Jumat: 08.00 - 16.00 WIT</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ================= SISI KANAN (AREA DINAMIS) ================= -->
+      <section class="lg:col-span-8 space-y-6">
+
+        <!-- 1. WADAH BERANDA UTAMA (BERITA & CAPAIAN PROGRAM) -->
+        <div id="viewHomeArea" class="space-y-6">
+
+          <!-- KOTAK 1: BERITA & ARTIKEL -->
+          <div class="bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+            <div class="bg-gradient-to-r from-[#0b2853] via-[#164e9e] to-[#1e64d4] px-6 py-4 flex items-center justify-between border-b border-blue-900 shadow-sm">
+              <h3 class="text-xl sm:text-2xl font-normal tracking-wide uppercase font-sans text-white">
+                BERITA & ARTIKEL
+              </h3>
+              <div class="text-xs font-normal text-blue-100">
+                <span id="articleTotalLabel">4 Artikel Terbit</span>
+              </div>
+            </div>
+
+            <!-- Filter Kategori & Cari -->
+            <div class="px-5 pt-3 pb-2 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 bg-slate-50/60">
+              <div class="flex items-center space-x-1.5 text-xs">
+                <span class="text-slate-500 font-medium mr-1">Filter:</span>
+                <button onclick="filterByTag('semua')" class="cat-pill font-bold px-3 py-1 rounded text-xs bg-blue-600 text-white transition shadow-sm" data-tag="semua">Semua</button>
+                <button onclick="filterByTag('kegiatan')" class="cat-pill font-medium px-3 py-1 rounded text-xs bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-tag="kegiatan">Kegiatan</button>
+                <button onclick="filterByTag('program')" class="cat-pill font-medium px-3 py-1 rounded text-xs bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-tag="program">Program</button>
+                <button onclick="filterByTag('pengumuman')" class="cat-pill font-medium px-3 py-1 rounded text-xs bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-tag="pengumuman">Pengumuman</button>
+              </div>
+              <div class="relative">
+                <input type="text" id="liveSearchInput" oninput="doSearch(this.value)" placeholder="Cari info..." class="text-xs px-2.5 py-1.5 pl-7 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 w-36 sm:w-44">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-2 top-2.5 text-[10px]"></i>
+              </div>
+            </div>
+
+            <!-- Grid 4 Kartu Berita -->
+            <div id="newsGrid" class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-5"></div>
+
+            <!-- Paginasi -->
+            <div class="p-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-600 bg-slate-50">
+              <span class="font-medium text-[11px] text-slate-500">Halaman 1 dari 10</span>
+              <div class="flex items-center space-x-1 font-bold">
+                <button class="px-2 py-1 bg-white border border-slate-300 rounded hover:bg-slate-100">&laquo;</button>
+                <button class="px-2.5 py-1 bg-blue-600 text-white border border-blue-600 rounded">1</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-300 rounded hover:bg-slate-100 font-medium">2</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-300 rounded hover:bg-slate-100 font-medium">3</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-300 rounded hover:bg-slate-100 font-medium">4</button>
+                <button class="px-2.5 py-1 bg-white border border-slate-300 rounded hover:bg-slate-100">&raquo;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- KOTAK 2: CAPAIAN PROGRAM -->
+          <div class="bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+            <div class="bg-gradient-to-r from-[#0b2853] via-[#164e9e] to-[#1e64d4] px-6 py-4 text-center border-b border-blue-900 shadow-sm">
+              <h3 class="text-xl sm:text-2xl font-normal tracking-wide uppercase font-sans text-white">
+                CAPAIAN PROGRAM
+              </h3>
+            </div>
+            <div class="p-6 bg-slate-100">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                  <div class="text-2xl sm:text-3xl font-black text-blue-700 font-display">1.420</div>
+                  <div class="text-xs font-bold text-slate-700 mt-1 uppercase">Keluarga Berisiko</div>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Terdampingi TPK</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                  <div class="text-2xl sm:text-3xl font-black text-emerald-600 font-display">84,6%</div>
+                  <div class="text-xs font-bold text-slate-700 mt-1 uppercase">Capaian KB Aktif</div>
+                  <p class="text-[10px] text-slate-400 mt-0.5">10 Kabupaten/Kota</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                  <div class="text-2xl sm:text-3xl font-black text-blue-800 font-display">328</div>
+                  <div class="text-xs font-bold text-slate-700 mt-1 uppercase">Kelompok Tribina</div>
+                  <p class="text-[10px] text-slate-400 mt-0.5">BKB, BKR, dan BKL</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-center">
+                  <div class="text-2xl sm:text-3xl font-black text-indigo-700 font-display">215</div>
+                  <div class="text-xs font-bold text-slate-700 mt-1 uppercase">Penyuluh KB</div>
+                  <p class="text-[10px] text-slate-400 mt-0.5">PKB / PLKB Wilayah</p>
+                </div>
+              </div>
+              <div class="mt-4 p-3 bg-white rounded-lg border border-slate-200 flex items-center justify-between text-[11px] text-slate-600 shadow-sm">
+                <span><i class="fa-solid fa-chart-line text-blue-700 mr-1.5"></i> Sumber: Dashboard Sistem Informasi Keluarga (SIGA) BKKBN</span>
+                <span class="font-bold text-blue-900">Tahun 2026</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. WADAH HALAMAN ARTIKEL / MENU YANG DIKLIK (MUNCUL DI SISI KANAN INI) -->
+        <div id="viewDetailArea" class="hidden bg-white rounded-xl border-2 border-blue-600 shadow-md overflow-hidden">
+          
+          <div class="bg-gradient-to-r from-[#0b2853] via-[#164e9e] to-[#1e64d4] px-6 py-4 flex items-center justify-between border-b border-blue-900 shadow-sm">
+            <h3 id="detailHeaderTitle" class="text-lg sm:text-xl font-normal tracking-wide uppercase font-sans text-white">
+              INFORMASI RESMI
+            </h3>
+            <button onclick="switchPage('home')" class="text-xs bg-white/10 hover:bg-white text-white hover:text-blue-950 px-3 py-1.5 rounded transition border border-white/20">
+              <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Beranda
+            </button>
+          </div>
+
+          <div class="p-6">
+            <div id="detailImageWrapper" class="w-full rounded-2xl overflow-hidden border border-slate-200 shadow-sm mb-6 bg-slate-100 max-h-96">
+              <img id="detailImage" src="" alt="Foto Utama" class="w-full h-full object-cover">
+            </div>
+
+            <h2 id="detailTitle" class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight mb-4 font-display"></h2>
+
+            <div class="flex items-center space-x-3 text-xs text-slate-400 pb-4 mb-4 border-b border-slate-100">
+              <span><i class="fa-regular fa-calendar text-blue-600 mr-1"></i> Update: <span id="detailDate"></span></span>
+              <span>•</span>
+              <span><i class="fa-solid fa-building text-blue-600 mr-1"></i> DPD IPeKB Maluku Utara</span>
+            </div>
+
+            <div id="detailBodyContent" class="text-slate-700 text-sm sm:text-base leading-relaxed space-y-4 font-normal"></div>
+
+            <!-- Tombol Berbagi Sosmed -->
+            <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+              <span class="text-xs font-bold text-slate-500 uppercase">Bagikan Informasi Ini:</span>
+              <div class="flex items-center space-x-2">
+                <a href="#" onclick="shareSocmed('fb'); return false;" class="w-8 h-8 rounded-full bg-[#1877f2] text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" onclick="shareSocmed('tw'); return false;" class="w-8 h-8 rounded-full bg-[#1da1f2] text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" onclick="shareSocmed('mail'); return false;" class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-solid fa-envelope"></i></a>
+                <a href="#" onclick="shareSocmed('tele'); return false;" class="w-8 h-8 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-brands fa-telegram"></i></a>
+                <button onclick="window.print()" class="w-8 h-8 rounded-full bg-slate-600 text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-solid fa-print"></i></button>
+                <a href="#" onclick="shareSocmed('wa'); return false;" class="w-8 h-8 rounded-full bg-[#25d366] text-white flex items-center justify-center text-xs hover:opacity-90 transition shadow-sm"><i class="fa-brands fa-whatsapp"></i></a>
+              </div>
+            </div>
+
+            <!-- Kotak Kirim Komentar -->
+            <div class="mt-8 p-6 bg-slate-50 border border-slate-200 rounded-2xl">
+              <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                <span>Kirim Komentar / Saran</span>
+              </h4>
+              <form onsubmit="handleCommentSubmit(event)" class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 mb-1">Nama</label>
+                    <input type="text" required placeholder="ketik di sini" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 mb-1">No. HP</label>
+                    <input type="tel" required placeholder="ketik di sini" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 mb-1">E-mail</label>
+                    <input type="email" placeholder="email@gmail.com" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Isi Komentar</label>
+                  <textarea rows="3" required placeholder="Tuliskan komentar atau pertanyaan..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600"></textarea>
+                </div>
+                <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                  Kirim Komentar
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    <!-- PENUTUP GRID DAN PENUTUP MAIN -->
+    </div>
+  </main>
+
+  <!-- ==================== 5. FOOTER BIRU LENGKAP ==================== -->
+  <footer class="bg-[#0b2853] text-white pt-10 pb-8 mt-10 border-t-4 border-blue-900 shadow-xl w-full">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        
+        <div class="space-y-1">
+          <h4 class="text-2xl font-black tracking-tight font-display text-white">
+            DPD IPeKB
+          </h4>
+          <p class="text-sm font-bold text-amber-400 uppercase tracking-wide">
+            Provinsi Maluku Utara
+          </p>
+          <div class="text-xs text-blue-100 pt-2 leading-relaxed font-normal">
+            <p class="font-bold text-white">Sekretariat:</p>
+            <p>Jalan Marikrubu</p>
+            <p>Kecamatan Ternate Tengah - Kota Ternate</p>
+            <p>Provinsi Maluku Utara</p>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs font-semibold text-blue-100">
+          <div class="flex items-center space-x-3">
+            <div class="w-7 h-7 rounded-full bg-blue-800 flex items-center justify-center text-white font-bold shadow-sm">
+              <i class="fa-solid fa-phone text-[11px]"></i>
+            </div>
+            <span>085212345678</span>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-7 h-7 rounded-full bg-blue-800 flex items-center justify-center text-white font-bold shadow-sm">
+              <i class="fa-solid fa-envelope text-[11px]"></i>
+            </div>
+            <span>dpd_ipekb_ProvinsiMalukuutara</span>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-7 h-7 rounded-full bg-blue-800 flex items-center justify-center text-white font-bold shadow-sm">
+              <i class="fa-brands fa-facebook-f text-[11px]"></i>
+            </div>
+            <span>dpd ipekb maluku utara</span>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-7 h-7 rounded-full bg-blue-800 flex items-center justify-center text-white font-bold shadow-sm">
+              <i class="fa-brands fa-instagram text-[11px]"></i>
+            </div>
+            <span>dpd ipekb maluku utara</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-blue-900/80 text-center text-[11px] text-blue-300">
+        &copy; 2026 DPD IPeKB Provinsi Maluku Utara. Hak Cipta Dilindungi. Sistem Informasi & Publikasi Terpadu.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== TOMBOL AKSES ADMIN RAHASIA (POJOK KANAN BAWAH) ==================== -->
+  <div class="fixed bottom-3 right-3 z-30">
+    <button 
+      onclick="openAdminModal()" 
+      title="Kelola Portal DPD IPeKB" 
+      class="opacity-30 hover:opacity-100 transition-all duration-300 p-2 sm:px-3 sm:py-1.5 rounded-full sm:rounded-lg bg-slate-900/60 hover:bg-blue-700 text-slate-300 hover:text-white backdrop-blur-sm border border-white/10 hover:border-blue-400 shadow-md flex items-center space-x-1.5 text-[11px] group"
+    >
+      <i class="fa-solid fa-lock text-[10px] group-hover:text-amber-300 transition-colors"></i>
+      <span class="hidden sm:inline font-semibold tracking-wide">Admin Portal</span>
+    </button>
+  </div>
+
+  <!-- ==================== 6. MODAL PANEL ADMIN ==================== -->
+  <div id="adminModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-200 custom-scrollbar flex flex-col">
+      
+      <!-- Header Modal -->
+      <div class="bg-blue-700 text-white px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+        <div class="flex items-center space-x-2.5">
+          <i class="fa-solid fa-screwdriver-wrench text-lg"></i>
+          <div>
+            <h3 class="text-base font-bold leading-tight">Panel Administrasi & Pengelola Portal IPeKB</h3>
+            <p class="text-[11px] text-blue-200">Kelola artikel, halaman menu resmi, banner hero, teks ticker, dan pengurus</p>
+          </div>
+        </div>
+        <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center text-sm transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <!-- 1. Form Verifikasi Login Admin -->
+        <div id="adminLoginForm" class="text-center py-8">
+          <div class="w-16 h-16 mx-auto rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-4 border border-blue-200">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h4 class="text-lg font-bold text-slate-800">Verifikasi Hak Akses Admin</h4>
+          <p class="text-xs text-slate-500 mt-1 mb-5">Halaman ini terproteksi. Masukkan kata sandi resmi administrator.</p>
+          
+          <form onsubmit="handleLoginSubmit(event)" class="max-w-xs mx-auto space-y-4">
+            <div>
+              <input type="password" id="inputAdminPass" required placeholder="Masukkan kata sandi..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 text-center font-bold tracking-widest">
+            </div>
+            <button type="submit" class="w-full px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition shadow">
+              Masuk ke Panel Pengelola
+            </button>
+          </form>
+        </div>
+
+        <!-- 2. Area Dashboard Admin -->
+        <div id="adminDashboardArea" class="hidden space-y-6">
+          
+          <!-- Baris Navigasi Tab Pengelola -->
+          <div class="flex flex-wrap items-center border-b border-slate-200 gap-2 sm:gap-4 text-xs font-bold pb-2">
+            <button onclick="switchAdminTab('berita')" id="tabBtnBerita" class="pb-1 text-blue-600 border-b-2 border-blue-600 transition">
+              <i class="fa-solid fa-newspaper mr-1"></i> Berita & Artikel
+            </button>
+            <button onclick="switchAdminTab('menu')" id="tabBtnMenu" class="pb-1 text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition">
+              <i class="fa-solid fa-file-lines mr-1"></i> Konten Menu Navigasi
+            </button>
+            <button onclick="switchAdminTab('banner')" id="tabBtnBanner" class="pb-1 text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition">
+              <i class="fa-solid fa-image mr-1"></i> Banner Kanan Atas
+            </button>
+            <button onclick="switchAdminTab('pengurus')" id="tabBtnPengurus" class="pb-1 text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition">
+              <i class="fa-solid fa-users mr-1"></i> Pengurus Inti & Ticker
+            </button>
+            <button onclick="logoutAdmin()" class="ml-auto text-rose-500 hover:text-rose-700 transition">
+              <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
+            </button>
+          </div>
+
+          <!-- TAB 1: FORM KELOLA BERITA & ARTIKEL -->
+          <div id="adminTabBerita" class="space-y-5">
+            <div class="bg-blue-50/70 p-4 rounded-xl border border-blue-200">
+              <h5 id="formAdminTitle" class="text-xs font-bold text-blue-900 uppercase tracking-wide mb-3">
+                <i class="fa-solid fa-plus-circle mr-1"></i> Tambah Berita / Kegiatan Baru
+              </h5>
+
+              <form onsubmit="saveArticle(event)" class="space-y-3">
+                <input type="hidden" id="editArticleId">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Kategori Konten</label>
+                    <select id="inputCategory" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                      <option value="kegiatan">Kegiatan Lapangan</option>
+                      <option value="program">Program Unggulan</option>
+                      <option value="pengumuman">Pengumuman Resmi</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Tanggal Rilis</label>
+                    <input type="date" id="inputDate" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Judul Artikel / Informasi</label>
+                  <input type="text" id="inputTitle" required placeholder="Contoh: Rakorda Program Bangga Kencana DPD IPeKB Malut" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                </div>
+
+                <!-- Opsi Foto Berita: Unggah File Langsung ATAU Masukkan Link URL -->
+                <div class="space-y-1.5">
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase">Foto / Dokumentasi Berita</label>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-upload mr-1"></i>Unggah dari Komputer/HP:</label>
+                      <input type="file" id="inputFileNewsPhoto" accept="image/*" class="w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200">
+                    </div>
+                    <div>
+                      <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-link mr-1"></i>Atau Tautan URL Online:</label>
+                      <input type="url" id="inputImageUrl" placeholder="https://..." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Ringkasan Singkat</label>
+                  <textarea id="inputSummary" rows="2" required placeholder="Tuliskan intisari rilis berita..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Naskah Lengkap Berita</label>
+                  <textarea id="inputContent" rows="4" required placeholder="Uraikan detail jalannya kegiatan..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 leading-relaxed"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Link File / Unduhan Dokumen (Opsional)</label>
+                  <input type="url" id="inputFileUrl" placeholder="Link Google Drive, PDF, formulir, atau modul pelatihan" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                </div>
+
+                <div class="pt-2 flex items-center space-x-2">
+                  <button type="submit" id="btnSaveArticle" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition shadow">
+                    Publikasikan Berita
+                  </button>
+                  <button type="button" id="btnCancelEdit" onclick="resetArticleForm()" class="hidden px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-semibold">
+                    Batal Edit
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Daftar Berita Aktif</h5>
+              <div id="adminNewsList" class="space-y-2 max-h-56 overflow-y-auto pr-1 custom-scrollbar"></div>
+            </div>
+          </div>
+
+          <!-- TAB 2: FORM ISI & UPDATE HALAMAN MENU -->
+          <div id="adminTabMenu" class="hidden space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+              <h5 class="text-xs font-bold text-blue-900 uppercase">Perbarui Naskah & Foto Halaman Menu</h5>
+              <p class="text-xs text-slate-500">Pilih menu yang ingin diisi atau diperbarui isinya oleh admin.</p>
+              
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Pilih Halaman Menu</label>
+                <select id="selectMenuKey" onchange="loadMenuContentForm(this.value)" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-bold text-blue-900 focus:ring-1 focus:ring-blue-600">
+                  <option value="profil">Profil</option>
+                  <option value="visimisi">Visi Misi</option>
+                  <option value="program">Program Kerja</option>
+                  <option value="kegiatan">Kegiatan</option>
+                  <option value="galeri">Galeri</option>
+                  <option value="bantuan">Bantuan</option>
+                  <option value="layanan">Layanan</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Judul Halaman</label>
+                <input type="text" id="inputMenuTitle" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+              </div>
+
+              <!-- Unggah Sampul Menu -->
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-bold text-slate-600 uppercase">Foto Sampul Menu</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-upload mr-1"></i>Unggah dari Komputer/HP:</label>
+                    <input type="file" id="inputFileMenuPhoto" accept="image/*" class="w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200">
+                  </div>
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-link mr-1"></i>Atau Tautan URL:</label>
+                    <input type="url" id="inputMenuImage" placeholder="https://..." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Isi / Uraian Lengkap (Mendukung Teks Paragraf)</label>
+                <textarea id="inputMenuBody" rows="7" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600 leading-relaxed"></textarea>
+              </div>
+
+              <button onclick="saveMenuContent()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow">
+                Simpan Pembaruan Halaman Menu
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 3: PENGATURAN BANNER KANAN ATAS HERO SECTION -->
+          <div id="adminTabBanner" class="hidden space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+              <h5 class="text-xs font-bold text-blue-900 uppercase">Banner Lanskap Kanan Atas</h5>
+              <p class="text-xs text-slate-500">Perbarui gambar pemandangan serta kalimat slogan yang ada di dalam bingkai hero kanan atas.</p>
+
+              <!-- Unggah Banner Hero -->
+              <div class="space-y-1.5">
+                <label class="block text-[11px] font-bold text-slate-600 uppercase">Pilih Gambar Banner</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-upload mr-1"></i>Unggah dari Komputer/HP:</label>
+                    <input type="file" id="inputFileBannerPhoto" accept="image/*" class="w-full text-xs text-slate-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200">
+                  </div>
+                  <div>
+                    <label class="block text-[10px] text-slate-500 font-semibold mb-0.5"><i class="fa-solid fa-link mr-1"></i>Atau Tautan URL:</label>
+                    <input type="url" id="inputHeroImgUrl" placeholder="https://..." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Judul Slogan Banner</label>
+                <input type="text" id="inputHeroTitle" placeholder="Contoh: Semangat Berencana Di Bumi Kie Raha" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Sub-Kalimat Penjelas Banner</label>
+                <textarea id="inputHeroSubtitle" rows="2" placeholder="Contoh: Dedikasi Penyuluh KB mewujudkan keluarga berkualitas..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs focus:ring-1 focus:ring-blue-600"></textarea>
+              </div>
+
+              <button onclick="saveHeroBannerSetting()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition shadow">
+                Perbarui Banner Kanan Atas
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 4: PENGURUS INTI & TICKER -->
+          <div id="adminTabPengurus" class="hidden space-y-4">
+            <!-- Ticker Running Text -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+              <h5 class="text-xs font-bold text-slate-800 uppercase">Teks Running Ticker (Sekilas Info)</h5>
+              <input type="text" id="settingTickerInput" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs">
+              <button onclick="saveTickerSetting()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-md">
+                Perbarui Teks Ticker
+              </button>
+            </div>
+
+            <!-- Pergantian Foto & Data Pengurus Inti -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+              <h5 class="text-xs font-bold text-slate-800 uppercase">Pergantian Foto & Label Pengurus Inti</h5>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <!-- Ketua DPD -->
+                <div class="space-y-1.5 bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                  <span class="font-bold text-blue-700 block"><i class="fa-solid fa-user-tie mr-1"></i> Ketua DPD</span>
+                  <label class="block text-[10px] text-slate-500 font-semibold">Label / Nama</label>
+                  <input type="text" id="settingKetuaName" placeholder="Ketua DPD" class="w-full px-2.5 py-1.5 border border-slate-300 rounded text-xs">
+                  <label class="block text-[10px] text-slate-500 font-semibold">Unggah Foto:</label>
+                  <input type="file" id="inputFileKetua" accept="image/*" class="w-full text-[10px] text-slate-600 file:mr-1 file:py-1 file:px-2 file:rounded file:border-0 file:bg-blue-100 file:text-blue-800">
+                  <input type="url" id="settingKetuaPhoto" placeholder="atau Tautan URL Foto" class="w-full px-2.5 py-1 border border-slate-300 rounded text-[11px] mt-1">
+                </div>
+
+                <!-- Sekretaris -->
+                <div class="space-y-1.5 bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                  <span class="font-bold text-blue-700 block"><i class="fa-solid fa-user-pen mr-1"></i> Sekretaris</span>
+                  <label class="block text-[10px] text-slate-500 font-semibold">Label / Nama</label>
+                  <input type="text" id="settingSekretarisName" placeholder="Sekretaris" class="w-full px-2.5 py-1.5 border border-slate-300 rounded text-xs">
+                  <label class="block text-[10px] text-slate-500 font-semibold">Unggah Foto:</label>
+                  <input type="file" id="inputFileSekretaris" accept="image/*" class="w-full text-[10px] text-slate-600 file:mr-1 file:py-1 file:px-2 file:rounded file:border-0 file:bg-blue-100 file:text-blue-800">
+                  <input type="url" id="settingSekretarisPhoto" placeholder="atau Tautan URL Foto" class="w-full px-2.5 py-1 border border-slate-300 rounded text-[11px] mt-1">
+                </div>
+
+                <!-- Bendahara -->
+                <div class="space-y-1.5 bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                  <span class="font-bold text-blue-700 block"><i class="fa-solid fa-wallet mr-1"></i> Bendahara</span>
+                  <label class="block text-[10px] text-slate-500 font-semibold">Label / Nama</label>
+                  <input type="text" id="settingBendaharaName" placeholder="Bendahara" class="w-full px-2.5 py-1.5 border border-slate-300 rounded text-xs">
+                  <label class="block text-[10px] text-slate-500 font-semibold">Unggah Foto:</label>
+                  <input type="file" id="inputFileBendahara" accept="image/*" class="w-full text-[10px] text-slate-600 file:mr-1 file:py-1 file:px-2 file:rounded file:border-0 file:bg-blue-100 file:text-blue-800">
+                  <input type="url" id="settingBendaharaPhoto" placeholder="atau Tautan URL Foto" class="w-full px-2.5 py-1 border border-slate-300 rounded text-[11px] mt-1">
+                </div>
+              </div>
+
+              <button onclick="savePengurusSetting()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg transition shadow">
+                Simpan Perubahan Pengurus Inti
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 7. TOAST NOTIFIKASI ==================== -->
+  <div id="toastBox" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 text-xs border border-slate-700">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+    <span id="toastMsg">Pesan</span>
+  </div>
+
+  <!-- ==================== 8. FIREBASE SDK SCRIPTS (CDN RESMI) ==================== -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+  <!-- External JavaScript Website -->
+  <script src="script.js"></script>
+</body>
+</html>
