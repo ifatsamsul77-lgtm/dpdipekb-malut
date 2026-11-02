@@ -131,6 +131,7 @@ let isAuthed = false;
 let configData = {
   ticker: "Selamat Datang di Portal Website Resmi DPD IPeKB Provinsi Maluku Utara • Menjangkau Keluarga, Menata Masa Depan Sejahtera di Bumi Moloku Kie Raha.",
   heroImg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
+  heroBgImg: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80",
   heroTitle: "Semangat Berencana Di Bumi Kie Raha",
   heroSubtitle: "Dedikasi Penyuluh KB mewujudkan keluarga berkualitas & percepatan penurunan stunting.",
   ketuaName: "Ketua DPD",
@@ -656,19 +657,27 @@ async function saveMenuContent() {
   showToast('Konten menu ' + key.toUpperCase() + ' berhasil disimpan!');
 }
 
-// ==================== PENGATURAN BANNER KANAN ATAS ====================
+// ==================== PENGATURAN BANNER & LATAR HERO ====================
 async function saveHeroBannerSetting() {
+  // 1. Gambar Banner Kotak Kanan
   let imgUrl = document.getElementById('inputHeroImgUrl').value.trim() || configData.heroImg;
-  const fileInput = document.getElementById('inputFileBannerPhoto');
-  imgUrl = await uploadImageToStorage(fileInput, imgUrl, "hero_banners");
+  const fileInputBanner = document.getElementById('inputFileBannerPhoto');
+  imgUrl = await uploadImageToStorage(fileInputBanner, imgUrl, "hero_banners");
+
+  // 2. Latar Belakang Hero (Watermark / Awan Membayang)
+  const heroBgInput = document.getElementById('inputHeroBgUrl');
+  let bgUrl = (heroBgInput ? heroBgInput.value.trim() : '') || configData.heroBgImg;
+  const fileInputBg = document.getElementById('inputFileHeroBgPhoto');
+  bgUrl = await uploadImageToStorage(fileInputBg, bgUrl, "hero_backgrounds");
 
   configData.heroImg = imgUrl;
+  configData.heroBgImg = bgUrl;
   configData.heroTitle = document.getElementById('inputHeroTitle').value.trim() || configData.heroTitle;
   configData.heroSubtitle = document.getElementById('inputHeroSubtitle').value.trim() || configData.heroSubtitle;
 
   saveStorage();
   renderConfigUI();
-  showToast('Banner kanan atas berhasil diperbarui!');
+  showToast('Banner & Latar Belakang Hero berhasil diperbarui!');
 }
 
 // ==================== PENGATURAN CAPAIAN PROGRAM (REAL-TIME CLOUD) ====================
@@ -705,11 +714,18 @@ function populateSettingsForm() {
   if (document.getElementById('settingTickerInput')) {
     document.getElementById('settingTickerInput').value = configData.ticker;
   }
+  
+  // Banner Kotak Kanan & Latar Belakang Hero
   if (document.getElementById('inputHeroImgUrl')) {
-    document.getElementById('inputHeroImgUrl').value = configData.heroImg;
-    document.getElementById('inputHeroTitle').value = configData.heroTitle;
-    document.getElementById('inputHeroSubtitle').value = configData.heroSubtitle;
+    document.getElementById('inputHeroImgUrl').value = configData.heroImg || '';
+    document.getElementById('inputHeroTitle').value = configData.heroTitle || '';
+    document.getElementById('inputHeroSubtitle').value = configData.heroSubtitle || '';
   }
+  if (document.getElementById('inputHeroBgUrl')) {
+    document.getElementById('inputHeroBgUrl').value = configData.heroBgImg || '';
+  }
+
+  // Pengurus Inti
   if (document.getElementById('settingKetuaName')) {
     document.getElementById('settingKetuaName').value = configData.ketuaName;
     document.getElementById('settingKetuaPhoto').value = configData.ketuaPhoto;
@@ -719,7 +735,7 @@ function populateSettingsForm() {
     document.getElementById('settingBendaharaPhoto').value = configData.bendaharaPhoto;
   }
 
-  // Isi formulir Capaian Program di panel admin
+  // Formulir Capaian Program
   if (document.getElementById('inputCapaianKeluarga')) {
     document.getElementById('inputCapaianKeluarga').value = capaianData.keluarga;
     document.getElementById('inputCapaianKbAktif').value = capaianData.kbAktif;
@@ -767,6 +783,7 @@ function renderConfigUI() {
   const ticker = document.getElementById('tickerTextContainer');
   if (ticker) ticker.innerText = configData.ticker;
 
+  // Render Foto Banner Kanan & Teks
   const heroImg = document.getElementById('viewHeroBannerImg');
   const heroTitle = document.getElementById('viewHeroBannerTitle');
   const heroSub = document.getElementById('viewHeroBannerSubtitle');
@@ -774,6 +791,13 @@ function renderConfigUI() {
   if (heroTitle) heroTitle.innerText = configData.heroTitle;
   if (heroSub) heroSub.innerText = configData.heroSubtitle;
 
+  // Render Foto Latar Belakang Hero (Watermark Awan Membayang)
+  const heroBg = document.getElementById('viewHeroBgImg');
+  if (heroBg && configData.heroBgImg) {
+    heroBg.src = configData.heroBgImg;
+  }
+
+  // Render Pengurus Inti
   const viewNameKetua = document.getElementById('viewNameKetua');
   const viewPhotoKetua = document.getElementById('viewPhotoKetua');
   if (viewNameKetua) viewNameKetua.innerText = configData.ketuaName;
