@@ -177,7 +177,9 @@ function initStorage() {
 
   const storedConf = localStorage.getItem('ipekb_config');
   if (storedConf) {
-    try { configData = Object.assign(configData, JSON.parse(storedConf)); } catch (e) {}
+    try { 
+      configData = Object.assign(configData, JSON.parse(storedConf)); 
+    } catch (e) {}
   }
 
   const storedPages = localStorage.getItem('ipekb_pages');
@@ -659,25 +661,51 @@ async function saveMenuContent() {
 
 // ==================== PENGATURAN BANNER & LATAR HERO ====================
 async function saveHeroBannerSetting() {
-  // 1. Gambar Banner Kotak Kanan
-  let imgUrl = document.getElementById('inputHeroImgUrl').value.trim() || configData.heroImg;
-  const fileInputBanner = document.getElementById('inputFileBannerPhoto');
-  imgUrl = await uploadImageToStorage(fileInputBanner, imgUrl, "hero_banners");
+  const saveBtn = document.querySelector("#adminTabBanner button[onclick='saveHeroBannerSetting()']");
+  if (saveBtn) {
+    saveBtn.disabled = true;
+    saveBtn.innerText = "Menyimpan ke Cloud...";
+  }
 
-  // 2. Latar Belakang Hero (Watermark / Awan Membayang)
-  const heroBgInput = document.getElementById('inputHeroBgUrl');
-  let bgUrl = (heroBgInput ? heroBgInput.value.trim() : '') || configData.heroBgImg;
-  const fileInputBg = document.getElementById('inputFileHeroBgPhoto');
-  bgUrl = await uploadImageToStorage(fileInputBg, bgUrl, "hero_backgrounds");
+  try {
+    // 1. Gambar Banner Kotak Kanan (Pertahankan jika kosong)
+    const inputHeroImg = document.getElementById('inputHeroImgUrl');
+    let imgUrl = (inputHeroImg && inputHeroImg.value.trim() !== '') ? inputHeroImg.value.trim() : configData.heroImg;
+    const fileInputBanner = document.getElementById('inputFileBannerPhoto');
+    imgUrl = await uploadImageToStorage(fileInputBanner, imgUrl, "hero_banners");
 
-  configData.heroImg = imgUrl;
-  configData.heroBgImg = bgUrl;
-  configData.heroTitle = document.getElementById('inputHeroTitle').value.trim() || configData.heroTitle;
-  configData.heroSubtitle = document.getElementById('inputHeroSubtitle').value.trim() || configData.heroSubtitle;
+    // 2. Latar Belakang Hero (Watermark / Awan Membayang)
+    const heroBgInput = document.getElementById('inputHeroBgUrl');
+    let bgUrl = (heroBgInput && heroBgInput.value.trim() !== '') ? heroBgInput.value.trim() : configData.heroBgImg;
+    const fileInputBg = document.getElementById('inputFileHeroBgPhoto');
+    bgUrl = await uploadImageToStorage(fileInputBg, bgUrl, "hero_backgrounds");
 
-  saveStorage();
-  renderConfigUI();
-  showToast('Banner & Latar Belakang Hero berhasil diperbarui!');
+    // Update config global
+    configData.heroImg = imgUrl;
+    configData.heroBgImg = bgUrl;
+    
+    const inputTitle = document.getElementById('inputHeroTitle');
+    if (inputTitle && inputTitle.value.trim() !== '') {
+      configData.heroTitle = inputTitle.value.trim();
+    }
+    
+    const inputSubtitle = document.getElementById('inputHeroSubtitle');
+    if (inputSubtitle && inputSubtitle.value.trim() !== '') {
+      configData.heroSubtitle = inputSubtitle.value.trim();
+    }
+
+    saveStorage();
+    renderConfigUI();
+    showToast('Banner & Latar Belakang Hero berhasil diperbarui!');
+  } catch (err) {
+    console.error(err);
+    showToast('Gagal menyimpan banner: ' + err.message);
+  } finally {
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.innerText = "Perbarui Banner & Latar Hero";
+    }
+  }
 }
 
 // ==================== PENGATURAN CAPAIAN PROGRAM (REAL-TIME CLOUD) ====================
@@ -712,36 +740,36 @@ function renderCapaianUI() {
 // ==================== PENGATURAN TICKER & PENGURUS INTI ====================
 function populateSettingsForm() {
   if (document.getElementById('settingTickerInput')) {
-    document.getElementById('settingTickerInput').value = configData.ticker;
+    document.getElementById('settingTickerInput').value = configData.ticker || '';
   }
   
   // Banner Kotak Kanan & Latar Belakang Hero
   if (document.getElementById('inputHeroImgUrl')) {
-    document.getElementById('inputHeroImgUrl').value = configData.heroImg || '';
+    document.getElementById('inputHeroImgUrl').value = (configData.heroImg && !configData.heroImg.startsWith('data:')) ? configData.heroImg : '';
     document.getElementById('inputHeroTitle').value = configData.heroTitle || '';
     document.getElementById('inputHeroSubtitle').value = configData.heroSubtitle || '';
   }
   if (document.getElementById('inputHeroBgUrl')) {
-    document.getElementById('inputHeroBgUrl').value = configData.heroBgImg || '';
+    document.getElementById('inputHeroBgUrl').value = (configData.heroBgImg && !configData.heroBgImg.startsWith('data:')) ? configData.heroBgImg : '';
   }
 
   // Pengurus Inti
   if (document.getElementById('settingKetuaName')) {
-    document.getElementById('settingKetuaName').value = configData.ketuaName;
-    document.getElementById('settingKetuaPhoto').value = configData.ketuaPhoto;
-    document.getElementById('settingSekretarisName').value = configData.sekretarisName;
-    document.getElementById('settingSekretarisPhoto').value = configData.sekretarisPhoto;
-    document.getElementById('settingBendaharaName').value = configData.bendaharaName;
-    document.getElementById('settingBendaharaPhoto').value = configData.bendaharaPhoto;
+    document.getElementById('settingKetuaName').value = configData.ketuaName || '';
+    document.getElementById('settingKetuaPhoto').value = (configData.ketuaPhoto && !configData.ketuaPhoto.startsWith('data:')) ? configData.ketuaPhoto : '';
+    document.getElementById('settingSekretarisName').value = configData.sekretarisName || '';
+    document.getElementById('settingSekretarisPhoto').value = (configData.sekretarisPhoto && !configData.sekretarisPhoto.startsWith('data:')) ? configData.sekretarisPhoto : '';
+    document.getElementById('settingBendaharaName').value = configData.bendaharaName || '';
+    document.getElementById('settingBendaharaPhoto').value = (configData.bendaharaPhoto && !configData.bendaharaPhoto.startsWith('data:')) ? configData.bendaharaPhoto : '';
   }
 
   // Formulir Capaian Program
   if (document.getElementById('inputCapaianKeluarga')) {
-    document.getElementById('inputCapaianKeluarga').value = capaianData.keluarga;
-    document.getElementById('inputCapaianKbAktif').value = capaianData.kbAktif;
-    document.getElementById('inputCapaianTribina').value = capaianData.tribina;
-    document.getElementById('inputCapaianPenyuluh').value = capaianData.penyuluh;
-    document.getElementById('inputCapaianTahun').value = capaianData.tahun;
+    document.getElementById('inputCapaianKeluarga').value = capaianData.keluarga || '';
+    document.getElementById('inputCapaianKbAktif').value = capaianData.kbAktif || '';
+    document.getElementById('inputCapaianTribina').value = capaianData.tribina || '';
+    document.getElementById('inputCapaianPenyuluh').value = capaianData.penyuluh || '';
+    document.getElementById('inputCapaianTahun').value = capaianData.tahun || '';
   }
 }
 
@@ -787,7 +815,7 @@ function renderConfigUI() {
   const heroImg = document.getElementById('viewHeroBannerImg');
   const heroTitle = document.getElementById('viewHeroBannerTitle');
   const heroSub = document.getElementById('viewHeroBannerSubtitle');
-  if (heroImg) heroImg.src = configData.heroImg;
+  if (heroImg && configData.heroImg) heroImg.src = configData.heroImg;
   if (heroTitle) heroTitle.innerText = configData.heroTitle;
   if (heroSub) heroSub.innerText = configData.heroSubtitle;
 
@@ -801,17 +829,17 @@ function renderConfigUI() {
   const viewNameKetua = document.getElementById('viewNameKetua');
   const viewPhotoKetua = document.getElementById('viewPhotoKetua');
   if (viewNameKetua) viewNameKetua.innerText = configData.ketuaName;
-  if (viewPhotoKetua) viewPhotoKetua.src = configData.ketuaPhoto;
+  if (viewPhotoKetua && configData.ketuaPhoto) viewPhotoKetua.src = configData.ketuaPhoto;
 
   const viewNameSekretaris = document.getElementById('viewNameSekretaris');
   const viewPhotoSekretaris = document.getElementById('viewPhotoSekretaris');
   if (viewNameSekretaris) viewNameSekretaris.innerText = configData.sekretarisName;
-  if (viewPhotoSekretaris) viewPhotoSekretaris.src = configData.sekretarisPhoto;
+  if (viewPhotoSekretaris && configData.sekretarisPhoto) viewPhotoSekretaris.src = configData.sekretarisPhoto;
 
   const viewNameBendahara = document.getElementById('viewNameBendahara');
   const viewPhotoBendahara = document.getElementById('viewPhotoBendahara');
   if (viewNameBendahara) viewNameBendahara.innerText = configData.bendaharaName;
-  if (viewPhotoBendahara) viewPhotoBendahara.src = configData.bendaharaPhoto;
+  if (viewPhotoBendahara && configData.bendaharaPhoto) viewPhotoBendahara.src = configData.bendaharaPhoto;
 }
 
 // ==================== HELPER SOSMED & KOMENTAR ====================
