@@ -1,6 +1,6 @@
-/* ==================== WARNA & GAYA KEMENDUKBANGGA (ELEGAN & FORMAL) ==================== */
+/* ==================== WARNA & GAYA RESMI DPD IPeKB (ELEGAN & FORMAL) ==================== */
 
-/* Banner Gradasi Biru Berwibawa tanpa Garis Kuning Tebal */
+/* Banner Gradasi Biru Berwibawa */
 .title-banner-gradient {
   background: linear-gradient(180deg, #1d4ed8 0%, #103b7b 50%, #0b2853 100%);
   border-bottom: 2px solid #1e40af;
@@ -61,23 +61,29 @@
 }
 
 /* ==================== ANIMASI LOGO BERPUTAR HORISONTAL ==================== */
+.logo-spin-slow,
 .logo-spin-horizontal {
   display: inline-block;
-  animation: spinY 8s linear infinite;
+  animation: spinHorizontal 9s linear infinite;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
-/* Jeda rotasi saat kursor mouse menyentuh logo */
+.logo-spin-slow:hover,
 .logo-spin-horizontal:hover {
   animation-play-state: paused;
 }
 
-@keyframes spinY {
-  from {
+@keyframes spinHorizontal {
+  0% {
     transform: perspective(600px) rotateY(0deg);
   }
-  to {
+  100% {
     transform: perspective(600px) rotateY(360deg);
   }
 }
 
+/* ==================== PENYESUAIAN TEKS BANNER HERO ==================== */
+#heroSection h1 {
+  font-weight: 400 !important; /* Memastikan tulisan DPD IPeKB normal / tidak tebal */
+}
