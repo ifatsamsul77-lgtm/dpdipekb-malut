@@ -130,10 +130,7 @@ let isAuthed = false;
 
 let configData = {
   ticker: "Selamat Datang di Portal Website Resmi DPD IPeKB Provinsi Maluku Utara • Menjangkau Keluarga, Menata Masa Depan Sejahtera di Bumi Moloku Kie Raha.",
-  heroImg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
   heroBgImg: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80",
-  heroTitle: "Semangat Berencana Di Bumi Kie Raha",
-  heroSubtitle: "Dedikasi Penyuluh KB mewujudkan keluarga berkualitas & percepatan penurunan stunting.",
   ketuaName: "Ketua DPD",
   ketuaSub: "Masa Bakti 2024 - 2028",
   ketuaPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
@@ -216,7 +213,7 @@ function listenFirebaseRealtime() {
 
   db.ref('portal_web/config').on('value', snapshot => {
     if (snapshot.exists()) {
-      configData = snapshot.val();
+      configData = Object.assign(configData, snapshot.val());
       localStorage.setItem('ipekb_config', JSON.stringify(configData));
       renderConfigUI();
     }
@@ -659,7 +656,7 @@ async function saveMenuContent() {
   showToast('Konten menu ' + key.toUpperCase() + ' berhasil disimpan!');
 }
 
-// ==================== PENGATURAN BANNER & LATAR HERO ====================
+// ==================== PENGATURAN LATAR HERO ====================
 async function saveHeroBannerSetting() {
   const saveBtn = document.querySelector("#adminTabBanner button[onclick='saveHeroBannerSetting()']");
   if (saveBtn) {
@@ -668,42 +665,24 @@ async function saveHeroBannerSetting() {
   }
 
   try {
-    // 1. Gambar Banner Kotak Kanan (Pertahankan jika kosong)
-    const inputHeroImg = document.getElementById('inputHeroImgUrl');
-    let imgUrl = (inputHeroImg && inputHeroImg.value.trim() !== '') ? inputHeroImg.value.trim() : configData.heroImg;
-    const fileInputBanner = document.getElementById('inputFileBannerPhoto');
-    imgUrl = await uploadImageToStorage(fileInputBanner, imgUrl, "hero_banners");
-
-    // 2. Latar Belakang Hero (Watermark / Awan Membayang)
+    // Latar Belakang Hero Lebar
     const heroBgInput = document.getElementById('inputHeroBgUrl');
     let bgUrl = (heroBgInput && heroBgInput.value.trim() !== '') ? heroBgInput.value.trim() : configData.heroBgImg;
     const fileInputBg = document.getElementById('inputFileHeroBgPhoto');
     bgUrl = await uploadImageToStorage(fileInputBg, bgUrl, "hero_backgrounds");
 
-    // Update config global
-    configData.heroImg = imgUrl;
     configData.heroBgImg = bgUrl;
-    
-    const inputTitle = document.getElementById('inputHeroTitle');
-    if (inputTitle && inputTitle.value.trim() !== '') {
-      configData.heroTitle = inputTitle.value.trim();
-    }
-    
-    const inputSubtitle = document.getElementById('inputHeroSubtitle');
-    if (inputSubtitle && inputSubtitle.value.trim() !== '') {
-      configData.heroSubtitle = inputSubtitle.value.trim();
-    }
 
     saveStorage();
     renderConfigUI();
-    showToast('Banner & Latar Belakang Hero berhasil diperbarui!');
+    showToast('Latar Belakang Hero berhasil diperbarui!');
   } catch (err) {
     console.error(err);
-    showToast('Gagal menyimpan banner: ' + err.message);
+    showToast('Gagal menyimpan latar hero: ' + err.message);
   } finally {
     if (saveBtn) {
       saveBtn.disabled = false;
-      saveBtn.innerText = "Perbarui Banner & Latar Hero";
+      saveBtn.innerText = "Simpan Perubahan Latar Hero";
     }
   }
 }
@@ -743,12 +722,7 @@ function populateSettingsForm() {
     document.getElementById('settingTickerInput').value = configData.ticker || '';
   }
   
-  // Banner Kotak Kanan & Latar Belakang Hero
-  if (document.getElementById('inputHeroImgUrl')) {
-    document.getElementById('inputHeroImgUrl').value = (configData.heroImg && !configData.heroImg.startsWith('data:')) ? configData.heroImg : '';
-    document.getElementById('inputHeroTitle').value = configData.heroTitle || '';
-    document.getElementById('inputHeroSubtitle').value = configData.heroSubtitle || '';
-  }
+  // Latar Belakang Hero
   if (document.getElementById('inputHeroBgUrl')) {
     document.getElementById('inputHeroBgUrl').value = (configData.heroBgImg && !configData.heroBgImg.startsWith('data:')) ? configData.heroBgImg : '';
   }
@@ -811,15 +785,7 @@ function renderConfigUI() {
   const ticker = document.getElementById('tickerTextContainer');
   if (ticker) ticker.innerText = configData.ticker;
 
-  // Render Foto Banner Kanan & Teks
-  const heroImg = document.getElementById('viewHeroBannerImg');
-  const heroTitle = document.getElementById('viewHeroBannerTitle');
-  const heroSub = document.getElementById('viewHeroBannerSubtitle');
-  if (heroImg && configData.heroImg) heroImg.src = configData.heroImg;
-  if (heroTitle) heroTitle.innerText = configData.heroTitle;
-  if (heroSub) heroSub.innerText = configData.heroSubtitle;
-
-  // Render Foto Latar Belakang Hero (Watermark Awan Membayang)
+  // Render Foto Latar Belakang Hero
   const heroBg = document.getElementById('viewHeroBgImg');
   if (heroBg && configData.heroBgImg) {
     heroBg.src = configData.heroBgImg;
