@@ -131,13 +131,19 @@ let isAuthed = false;
 let configData = {
   ticker: "Selamat Datang di Portal Website Resmi DPD IPeKB Provinsi Maluku Utara • Menjangkau Keluarga, Menata Masa Depan Sejahtera di Bumi Moloku Kie Raha.",
   heroBgImg: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80",
-  ketuaName: "Ketua DPD",
+  // 1. Data Ketua DPD
+  ketuaJabatan: "Ketua DPD",
+  ketuaPerson: "Dra. Hj. Maryam, M.Si",
   ketuaSub: "Masa Bakti 2024 - 2028",
   ketuaPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-  sekretarisName: "Sekretaris",
+  // 2. Data Sekretaris
+  sekretarisJabatan: "Sekretaris",
+  sekretarisPerson: "Ahmad Fauzi, SKM",
   sekretarisSub: "Bidang Administrasi & Keorganisasian",
   sekretarisPhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-  bendaharaName: "Bendahara",
+  // 3. Data Bendahara
+  bendaharaJabatan: "Bendahara",
+  bendaharaPerson: "Nurul Hidayah, SE",
   bendaharaSub: "Bidang Keuangan & Perbendaharaan",
   bendaharaPhoto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
 };
@@ -718,26 +724,38 @@ function renderCapaianUI() {
 
 // ==================== PENGATURAN TICKER & PENGURUS INTI ====================
 function populateSettingsForm() {
+  // 1. Ticker
   if (document.getElementById('settingTickerInput')) {
     document.getElementById('settingTickerInput').value = configData.ticker || '';
   }
   
-  // Latar Belakang Hero
+  // 2. Latar Belakang Hero
   if (document.getElementById('inputHeroBgUrl')) {
     document.getElementById('inputHeroBgUrl').value = (configData.heroBgImg && !configData.heroBgImg.startsWith('data:')) ? configData.heroBgImg : '';
   }
 
-  // Pengurus Inti
-  if (document.getElementById('settingKetuaName')) {
-    document.getElementById('settingKetuaName').value = configData.ketuaName || '';
+  // 3. Pengurus Inti Lengkap (Ketua, Sekretaris, Bendahara)
+  if (document.getElementById('settingKetuaPerson')) {
+    // Ketua
+    document.getElementById('settingKetuaPerson').value = configData.ketuaPerson || '';
+    document.getElementById('settingKetuaJabatan').value = configData.ketuaJabatan || 'Ketua DPD';
+    document.getElementById('settingKetuaSub').value = configData.ketuaSub || 'Masa Bakti 2024 - 2028';
     document.getElementById('settingKetuaPhoto').value = (configData.ketuaPhoto && !configData.ketuaPhoto.startsWith('data:')) ? configData.ketuaPhoto : '';
-    document.getElementById('settingSekretarisName').value = configData.sekretarisName || '';
+
+    // Sekretaris
+    document.getElementById('settingSekretarisPerson').value = configData.sekretarisPerson || '';
+    document.getElementById('settingSekretarisJabatan').value = configData.sekretarisJabatan || 'Sekretaris';
+    document.getElementById('settingSekretarisSub').value = configData.sekretarisSub || 'Bidang Administrasi & Keorganisasian';
     document.getElementById('settingSekretarisPhoto').value = (configData.sekretarisPhoto && !configData.sekretarisPhoto.startsWith('data:')) ? configData.sekretarisPhoto : '';
-    document.getElementById('settingBendaharaName').value = configData.bendaharaName || '';
+
+    // Bendahara
+    document.getElementById('settingBendaharaPerson').value = configData.bendaharaPerson || '';
+    document.getElementById('settingBendaharaJabatan').value = configData.bendaharaJabatan || 'Bendahara';
+    document.getElementById('settingBendaharaSub').value = configData.bendaharaSub || 'Bidang Keuangan & Perbendaharaan';
     document.getElementById('settingBendaharaPhoto').value = (configData.bendaharaPhoto && !configData.bendaharaPhoto.startsWith('data:')) ? configData.bendaharaPhoto : '';
   }
 
-  // Formulir Capaian Program
+  // 4. Formulir Capaian Program
   if (document.getElementById('inputCapaianKeluarga')) {
     document.getElementById('inputCapaianKeluarga').value = capaianData.keluarga || '';
     document.getElementById('inputCapaianKbAktif').value = capaianData.kbAktif || '';
@@ -758,53 +776,74 @@ function saveTickerSetting() {
 }
 
 async function savePengurusSetting() {
-  // Ketua
+  // 1. Simpan Data Ketua DPD
   let kPhoto = document.getElementById('settingKetuaPhoto').value.trim() || configData.ketuaPhoto;
   kPhoto = await uploadImageToStorage(document.getElementById('inputFileKetua'), kPhoto, "pengurus_photos");
-  configData.ketuaName = document.getElementById('settingKetuaName').value.trim() || 'Ketua DPD';
+  configData.ketuaPerson = document.getElementById('settingKetuaPerson').value.trim() || 'Dra. Hj. Maryam, M.Si';
+  configData.ketuaJabatan = document.getElementById('settingKetuaJabatan').value.trim() || 'Ketua DPD';
+  configData.ketuaSub = document.getElementById('settingKetuaSub').value.trim() || 'Masa Bakti 2024 - 2028';
   configData.ketuaPhoto = kPhoto;
 
-  // Sekretaris
+  // 2. Simpan Data Sekretaris
   let sPhoto = document.getElementById('settingSekretarisPhoto').value.trim() || configData.sekretarisPhoto;
   sPhoto = await uploadImageToStorage(document.getElementById('inputFileSekretaris'), sPhoto, "pengurus_photos");
-  configData.sekretarisName = document.getElementById('settingSekretarisName').value.trim() || 'Sekretaris';
+  configData.sekretarisPerson = document.getElementById('settingSekretarisPerson').value.trim() || 'Ahmad Fauzi, SKM';
+  configData.sekretarisJabatan = document.getElementById('settingSekretarisJabatan').value.trim() || 'Sekretaris';
+  configData.sekretarisSub = document.getElementById('settingSekretarisSub').value.trim() || 'Bidang Administrasi & Keorganisasian';
   configData.sekretarisPhoto = sPhoto;
 
-  // Bendahara
+  // 3. Simpan Data Bendahara
   let bPhoto = document.getElementById('settingBendaharaPhoto').value.trim() || configData.bendaharaPhoto;
   bPhoto = await uploadImageToStorage(document.getElementById('inputFileBendahara'), bPhoto, "pengurus_photos");
-  configData.bendaharaName = document.getElementById('settingBendaharaName').value.trim() || 'Bendahara';
+  configData.bendaharaPerson = document.getElementById('settingBendaharaPerson').value.trim() || 'Nurul Hidayah, SE';
+  configData.bendaharaJabatan = document.getElementById('settingBendaharaJabatan').value.trim() || 'Bendahara';
+  configData.bendaharaSub = document.getElementById('settingBendaharaSub').value.trim() || 'Bidang Keuangan & Perbendaharaan';
   configData.bendaharaPhoto = bPhoto;
 
   saveStorage();
   renderConfigUI();
-  showToast('Data pengurus inti berhasil diperbarui!');
+  showToast('Data seluruh pengurus inti berhasil diperbarui!');
 }
 
 function renderConfigUI() {
+  // Ticker
   const ticker = document.getElementById('tickerTextContainer');
   if (ticker) ticker.innerText = configData.ticker;
 
-  // Render Foto Latar Belakang Hero
+  // Foto Latar Belakang Hero
   const heroBg = document.getElementById('viewHeroBgImg');
   if (heroBg && configData.heroBgImg) {
     heroBg.src = configData.heroBgImg;
   }
 
-  // Render Pengurus Inti
-  const viewNameKetua = document.getElementById('viewNameKetua');
+  // 1. Render Pengurus Inti - Ketua DPD
+  const viewJabatanKetua = document.getElementById('viewJabatanKetua');
+  const viewPersonKetua = document.getElementById('viewPersonKetua');
+  const viewSubKetua = document.getElementById('viewSubKetua');
   const viewPhotoKetua = document.getElementById('viewPhotoKetua');
-  if (viewNameKetua) viewNameKetua.innerText = configData.ketuaName;
+  if (viewJabatanKetua) viewJabatanKetua.innerText = configData.ketuaJabatan || 'Ketua DPD';
+  if (viewPersonKetua) viewPersonKetua.innerText = configData.ketuaPerson || 'Dra. Hj. Maryam, M.Si';
+  if (viewSubKetua) viewSubKetua.innerText = configData.ketuaSub || 'Masa Bakti 2024 - 2028';
   if (viewPhotoKetua && configData.ketuaPhoto) viewPhotoKetua.src = configData.ketuaPhoto;
 
-  const viewNameSekretaris = document.getElementById('viewNameSekretaris');
+  // 2. Render Pengurus Inti - Sekretaris
+  const viewJabatanSekretaris = document.getElementById('viewJabatanSekretaris');
+  const viewPersonSekretaris = document.getElementById('viewPersonSekretaris');
+  const viewSubSekretaris = document.getElementById('viewSubSekretaris');
   const viewPhotoSekretaris = document.getElementById('viewPhotoSekretaris');
-  if (viewNameSekretaris) viewNameSekretaris.innerText = configData.sekretarisName;
+  if (viewJabatanSekretaris) viewJabatanSekretaris.innerText = configData.sekretarisJabatan || 'Sekretaris';
+  if (viewPersonSekretaris) viewPersonSekretaris.innerText = configData.sekretarisPerson || 'Ahmad Fauzi, SKM';
+  if (viewSubSekretaris) viewSubSekretaris.innerText = configData.sekretarisSub || 'Bidang Administrasi & Keorganisasian';
   if (viewPhotoSekretaris && configData.sekretarisPhoto) viewPhotoSekretaris.src = configData.sekretarisPhoto;
 
-  const viewNameBendahara = document.getElementById('viewNameBendahara');
+  // 3. Render Pengurus Inti - Bendahara
+  const viewJabatanBendahara = document.getElementById('viewJabatanBendahara');
+  const viewPersonBendahara = document.getElementById('viewPersonBendahara');
+  const viewSubBendahara = document.getElementById('viewSubBendahara');
   const viewPhotoBendahara = document.getElementById('viewPhotoBendahara');
-  if (viewNameBendahara) viewNameBendahara.innerText = configData.bendaharaName;
+  if (viewJabatanBendahara) viewJabatanBendahara.innerText = configData.bendaharaJabatan || 'Bendahara';
+  if (viewPersonBendahara) viewPersonBendahara.innerText = configData.bendaharaPerson || 'Nurul Hidayah, SE';
+  if (viewSubBendahara) viewSubBendahara.innerText = configData.bendaharaSub || 'Bidang Keuangan & Perbendaharaan';
   if (viewPhotoBendahara && configData.bendaharaPhoto) viewPhotoBendahara.src = configData.bendaharaPhoto;
 }
 
