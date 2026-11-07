@@ -87,3 +87,11 @@
 #heroSection h1 {
   font-weight: 400 !important; /* Memastikan tulisan DPD IPeKB normal / tidak tebal */
 }
+
+/* ==================== PENYESUAIAN KARTU PENGURUS INTI ==================== */
+#viewPersonKetua,
+#viewPersonSekretaris,
+#viewPersonBendahara {
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
