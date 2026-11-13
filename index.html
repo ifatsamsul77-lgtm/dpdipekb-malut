@@ -86,19 +86,17 @@
     </div>
   </header>
 
-  <!-- ==================== 2. HERO SECTION BERSIH (TINGGI 2X LIPAT) ==================== -->
+<!-- ==================== 2. HERO SECTION BERSIH (TINGGI 2X LIPAT) ==================== -->
   <section id="heroSection" class="relative bg-[#0b2853] text-white py-20 md:py-28 min-h-[380px] md:min-h-[460px] flex items-center px-4 overflow-hidden border-b-4 border-blue-900">
     
-    <!-- FOTO BACKGROUND JELAS TANPA PENGHALANG AWAN & BINTIK -->
+    <!-- FOTO BACKGROUND JELAS TANPA LAPISAN WARNA PENUTUP -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <img 
         id="viewHeroBgImg"
         src="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80" 
         alt="Latar Belakang Kie Raha" 
-        class="w-full h-full object-cover object-center opacity-40 filter blur-none"
+        class="w-full h-full object-cover object-center opacity-100 filter blur-none"
       >
-      <!-- Lapisan Gelap Ringan Merata agar Teks Tetap Mudah Terbaca -->
-      <div class="absolute inset-0 bg-[#0b2853]/60"></div>
     </div>
 
     <!-- Konten Utama Hero Section -->
@@ -112,32 +110,32 @@
           <img 
             src="Logoipekb1.png" 
             alt="Logo IPeKB Maluku Utara" 
-            class="logo-spin-slow w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain drop-shadow-2xl"
+            class="logo-spin-slow w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)]"
           >
         </div>
 
         <!-- Wadah Tulisan Sejajar di Samping Kanan Logo -->
         <div class="flex flex-col justify-center space-y-1">
           <!-- Tulisan DPD IPeKB Normal (Tidak Tebal) -->
-          <h1 class="text-3xl sm:text-5xl md:text-[54px] font-normal tracking-wide leading-tight text-white font-sans drop-shadow-sm">
+          <h1 class="text-3xl sm:text-5xl md:text-[54px] font-normal tracking-wide leading-tight text-white font-sans drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             DPD IPeKB
           </h1>
           
           <!-- Kepanjangan & Provinsi Maluku Utara -->
-          <h2 class="text-sm sm:text-base md:text-lg font-normal text-blue-100 leading-relaxed drop-shadow">
+          <h2 class="text-sm sm:text-base md:text-lg font-normal text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
             Dewan Pimpinan Daerah Ikatan Penyuluh Keluarga Berencana<br>
-            <span class="text-amber-400 font-bold tracking-wide uppercase text-base sm:text-lg md:text-xl">Provinsi Maluku Utara</span>
+            <span class="text-amber-400 font-bold tracking-wide uppercase text-base sm:text-lg md:text-xl drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">Provinsi Maluku Utara</span>
           </h2>
 
           <!-- 3 Tombol Menu Navigasi Singkat -->
           <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
-            <button onclick="switchPage('profil')" class="px-7 py-2 border border-white/70 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-sm backdrop-blur-sm">
+            <button onclick="switchPage('profil')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Profil
             </button>
-            <button onclick="switchPage('visimisi')" class="px-7 py-2 border border-white/70 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-sm backdrop-blur-sm">
+            <button onclick="switchPage('visimisi')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Visi Misi
             </button>
-            <button onclick="switchPage('layanan')" class="px-7 py-2 border border-white/70 hover:border-white bg-white/10 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-sm backdrop-blur-sm">
+            <button onclick="switchPage('layanan')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Layanan
             </button>
           </div>
