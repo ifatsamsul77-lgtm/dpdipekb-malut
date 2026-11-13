@@ -54,13 +54,13 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col relative">
 
-  <!-- ==================== 1. TOP NAVBAR ==================== -->
+ <!-- ==================== 1. TOP NAVBAR (HURUF -20%) ==================== -->
   <header class="bg-[#0b2853] border-b border-blue-900 sticky top-0 z-40 shadow-sm">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-14">
         
-        <!-- Menu Navigasi Utama -->
-        <nav class="hidden md:flex items-center space-x-6 text-[13px] font-bold text-slate-200">
+        <!-- Menu Navigasi Utama (13px -> 10.5px) -->
+        <nav class="hidden md:flex items-center space-x-6 text-[10.5px] font-bold text-slate-200">
           <button onclick="switchPage('home')" id="nav-home" class="nav-item text-amber-400 py-1 transition">Home</button>
           <button onclick="switchPage('profil')" id="nav-profil" class="nav-item hover:text-amber-400 py-1 transition">Profil</button>
           <button onclick="switchPage('visimisi')" id="nav-visimisi" class="nav-item hover:text-amber-400 py-1 transition">Visi Misi</button>
@@ -70,14 +70,14 @@
           <button onclick="switchPage('bantuan')" id="nav-bantuan" class="nav-item hover:text-amber-400 py-1 transition">Bantuan</button>
         </nav>
 
-        <!-- Versi Mobile Header Label -->
+        <!-- Versi Mobile Header Label (14px -> 11px) -->
         <div class="md:hidden flex items-center space-x-2">
-          <span class="font-extrabold text-amber-400 text-sm tracking-wide">DPD IPeKB MALUT</span>
+          <span class="font-extrabold text-amber-400 text-[11px] tracking-wide">DPD IPeKB MALUT</span>
         </div>
 
-        <!-- Sisi Kanan Navbar Bersih & Proporsional -->
+        <!-- Sisi Kanan Navbar (11px -> 9px) -->
         <div class="flex items-center space-x-2">
-          <span class="hidden lg:inline-block text-[11px] font-semibold text-blue-200/80 bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/60">
+          <span class="hidden lg:inline-block text-[9px] font-semibold text-blue-200/80 bg-blue-950/60 px-3 py-1 rounded-full border border-blue-800/60">
             <i class="fa-solid fa-shield-halved text-amber-400 mr-1.5"></i>Portal Resmi Kie Raha
           </span>
         </div>
@@ -86,7 +86,7 @@
     </div>
   </header>
 
-<!-- ==================== 2. HERO SECTION BERSIH (TINGGI 2X LIPAT) ==================== -->
+  <!-- ==================== 2. HERO SECTION BERSIH (HURUF -20%) ==================== -->
   <section id="heroSection" class="relative bg-[#0b2853] text-white py-20 md:py-28 min-h-[380px] md:min-h-[460px] flex items-center px-4 overflow-hidden border-b-4 border-blue-900">
     
     <!-- FOTO BACKGROUND JELAS TANPA LAPISAN WARNA PENUTUP -->
@@ -116,26 +116,26 @@
 
         <!-- Wadah Tulisan Sejajar di Samping Kanan Logo -->
         <div class="flex flex-col justify-center space-y-1">
-          <!-- Tulisan DPD IPeKB Normal (Tidak Tebal) -->
-          <h1 class="text-3xl sm:text-5xl md:text-[54px] font-normal tracking-wide leading-tight text-white font-sans drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+          <!-- Tulisan DPD IPeKB Normal (-20%: 54px -> 43px) -->
+          <h1 class="text-[24px] sm:text-[38px] md:text-[43px] font-normal tracking-wide leading-tight text-white font-sans drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             DPD IPeKB
           </h1>
           
-          <!-- Kepanjangan & Provinsi Maluku Utara -->
-          <h2 class="text-sm sm:text-base md:text-lg font-normal text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+          <!-- Kepanjangan & Provinsi Maluku Utara (-20%: 18px -> 14.5px & 20px -> 16px) -->
+          <h2 class="text-[11px] sm:text-[13px] md:text-[14.5px] font-normal text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
             Dewan Pimpinan Daerah Ikatan Penyuluh Keluarga Berencana<br>
-            <span class="text-amber-400 font-bold tracking-wide uppercase text-base sm:text-lg md:text-xl drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">Provinsi Maluku Utara</span>
+            <span class="text-amber-400 font-bold tracking-wide uppercase text-[13px] sm:text-[14.5px] md:text-[16px] drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">Provinsi Maluku Utara</span>
           </h2>
 
-          <!-- 3 Tombol Menu Navigasi Singkat -->
+          <!-- 3 Tombol Menu Navigasi Singkat (-20%: 14px -> 11px) -->
           <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
-            <button onclick="switchPage('profil')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
+            <button onclick="switchPage('profil')" class="px-6 py-1.5 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-[10px] md:text-[11px] font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Profil
             </button>
-            <button onclick="switchPage('visimisi')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
+            <button onclick="switchPage('visimisi')" class="px-6 py-1.5 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-[10px] md:text-[11px] font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Visi Misi
             </button>
-            <button onclick="switchPage('layanan')" class="px-7 py-2 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-xs md:text-sm font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
+            <button onclick="switchPage('layanan')" class="px-6 py-1.5 border border-white/80 hover:border-white bg-black/30 hover:bg-white hover:text-blue-950 rounded-lg text-[10px] md:text-[11px] font-semibold tracking-wide transition shadow-md backdrop-blur-sm">
               Layanan
             </button>
           </div>
