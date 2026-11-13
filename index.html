@@ -89,13 +89,14 @@
   <!-- ==================== 2. HERO SECTION BERSIH (HURUF -20%) ==================== -->
   <section id="heroSection" class="relative bg-[#0b2853] text-white py-20 md:py-28 min-h-[380px] md:min-h-[460px] flex items-center px-4 overflow-hidden border-b-4 border-blue-900">
     
-    <!-- FOTO BACKGROUND JELAS TANPA LAPISAN WARNA PENUTUP -->
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+  <!-- FOTO BACKGROUND TANPA KEDIPAN GAMBAR LAMA -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#0b2853]">
       <img 
         id="viewHeroBgImg"
-        src="malutbanner1.jpg" 
+        src="" 
         alt="Latar Belakang Kie Raha" 
-        class="w-full h-full object-cover object-center opacity-100 filter blur-none"
+        onload="this.classList.remove('opacity-0'); this.classList.add('opacity-100');"
+        class="w-full h-full object-cover object-center opacity-0 transition-opacity duration-300"
       >
     </div>
 
