@@ -130,7 +130,7 @@ let isAuthed = false;
 
 let configData = {
   ticker: "Selamat Datang di Portal Website Resmi DPD IPeKB Provinsi Maluku Utara • Menjangkau Keluarga, Menata Masa Depan Sejahtera di Bumi Moloku Kie Raha.",
-  heroBgImg: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1600&q=80",
+  heroBgImg: "malutbanner1.jpg",
   // 1. Data Ketua DPD
   ketuaJabatan: "Ketua DPD",
   ketuaPerson: "Dra. Hj. Maryam, M.Si",
